@@ -1,3 +1,8 @@
+# ### por favor agrega aqui la direccion de la playlist
+
+playlist_url = "https://www.youtube.com/playlist?list=PLEFpZ3YehTnA6zl6_7zsvwMRhdJWlqoo6"
+
+
 # Instalar librerias no nativas en caso de no exisitir
 
 import subprocess
@@ -45,38 +50,7 @@ def add_to_path(ffmpeg_bin_path):
         os.environ['PATH'] = current_path + os.pathsep + ffmpeg_bin_path
         subprocess.run(['setx', 'PATH', f'{current_path}{os.pathsep}{ffmpeg_bin_path}'], shell=True)
 
-
-# Llamado a las funciones para descargar e instalar, valida si existe el archivo y omite el proceso en caso de que ya exista 
-
-
-extract = os.path.join('C:', 'ffmpeg-7.0.1')
-if  os.path.exists(extract):
-        print('El archivo existe en el directorio') 
-else:    
-    def main():
-        download_url = 'https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip'
-        if  os.path.exists(extract):
-            print('El archivo existe en el directorio')
-        else:
-            os.makedirs(extract)
-        ffmpeg_bin_path = download_ffmpeg(download_url, extract)
-        if ffmpeg_bin_path:
-            add_to_path(ffmpeg_bin_path)
-            print('ffmpeg instalado y agregado al PATH con éxito.')
-        else:
-            print('Error al instalar ffmpeg.')
-    if __name__ == "__main__":
-        main()
-
-
 # # Inicio del proceso de descarga en YouTube
-# 
-# 
-# ### por favor agrega aqui la direccion de la playlist
-
-
-playlist_url = "https://www.youtube.com/playlist?list=PLkVpKYNT_U9cDvqUqVVyI_Qo2OHRr9NPs"
-
 
 # Se define una función para crear una carpeta en base al nombre de la playlist, sin caracteres especiales
 
@@ -107,7 +81,26 @@ ydl_opts = {
 
 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
     info_dict = ydl.extract_info(playlist_url, download=False)
-     
+    
+rutacodec = r"C:\ffmpeg"   
+if  os.path.exists(rutacodec):
+        print('El archivo existe en el directorio') 
+else:    
+    def main():
+        download_url = 'https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip'
+        if  os.path.exists(rutacodec):
+            print('El archivo existe en el directorio')
+        else:
+            os.makedirs(rutacodec)
+        ffmpeg_bin_path = download_ffmpeg(download_url, rutacodec)
+        if ffmpeg_bin_path:
+            add_to_path(ffmpeg_bin_path)
+            print('ffmpeg instalado y agregado al PATH con éxito.')
+        else:
+            print('Error al instalar ffmpeg.')
+    if __name__ == "__main__":
+        main()
+        
     if 'title' in info_dict:
         playlist_title = clean_name(info_dict['title'])
         playlist_folder = os.path.join(save_path, playlist_title)
