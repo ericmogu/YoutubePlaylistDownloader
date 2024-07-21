@@ -1,6 +1,6 @@
 # ### por favor agrega aqui la direccion de la playlist
 
-playlist_url = "https://www.youtube.com/playlist?list=PLEFpZ3YehTnA6zl6_7zsvwMRhdJWlqoo6"
+playlist_url = "https://www.youtube.com/playlist?list=PLEFpZ3YehTnBheDSbyk9dk4vlLKreNrqt"
 
 
 # Instalar librerias no nativas en caso de no exisitir
@@ -83,13 +83,15 @@ with yt_dlp.YoutubeDL(ydl_opts) as ydl:
     info_dict = ydl.extract_info(playlist_url, download=False)
     
 rutacodec = r"C:\ffmpeg"   
-if  os.path.exists(rutacodec):
-        print('El archivo existe en el directorio') 
+# if  os.path.exists(rutacodec):
+newpath = os.environ['PATH']    
+if os.path.exists(newpath):
+        print('El path existe en el directorio') 
 else:    
     def main():
         download_url = 'https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip'
         if  os.path.exists(rutacodec):
-            print('El archivo existe en el directorio')
+            print('El archivo existe en el directorio ffmpeg')
         else:
             os.makedirs(rutacodec)
         ffmpeg_bin_path = download_ffmpeg(download_url, rutacodec)
